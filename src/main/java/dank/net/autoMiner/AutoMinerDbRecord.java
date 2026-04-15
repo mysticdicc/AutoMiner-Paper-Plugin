@@ -167,7 +167,9 @@ public final class AutoMinerDbRecord {
         Material.COAL_ORE,
         Material.COAL_BLOCK,
         Material.DEEPSLATE_COAL_ORE,
-        Material.GLOWSTONE
+        Material.GLOWSTONE,
+        Material.NETHER_QUARTZ_ORE,
+        Material.QUARTZ_BLOCK
     );
 
     static private final List<Material> stoneTypes = List.of(

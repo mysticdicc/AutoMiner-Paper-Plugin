@@ -160,7 +160,7 @@ public final class AutoMiner extends JavaPlugin implements Listener {
     private void loadMinerSignsFromChunk(final Chunk chunk) {
         var signs = getDbManager().getByChunk(chunk);
         miners.addAll(signs);
-        getLogger().info(signs.size() + " miners have been loaded in chunk " + chunk.getX() + " " + chunk.getZ() + ".");
+        if (signs.size() > 0) getLogger().info(signs.size() + " miners have been loaded in chunk " + chunk.getX() + " " + chunk.getZ() + ".");
     }
 
     private void unloadMinerSignsFromChunk(final Chunk chunk) {
