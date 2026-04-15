@@ -1,2 +1,3 @@
 mining:
   base-progress: 20.0
+  break-any: false

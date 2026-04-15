@@ -29,6 +29,46 @@ permissions:
   autominer.limit.unlimited:
     description: Allow player to own unlimited auto miners.
     default: false
+  autominer.type.wood:
+    description: Allow player to place wood type auto miners.
+    default: true
+  autominer.type.stone:
+    description: Allow player to place stone type auto miners.
+    default: false
+    children:
+      autominer.type.wood: true
+  autominer.type.copper:
+    description: Allow player to place copper type auto miners.
+    default: false
+    children:
+      autominer.type.stone: true
+  autominer.type.iron:
+    description: Allow player to place iron type auto miners.
+    default: false
+    children:
+      autominer.type.copper: true
+  autominer.type.gold:
+    description: Allow player to place gold type auto miners.
+    default: false
+    children:
+      autominer.type.iron: true
+  autominer.type.diamond:
+    description: Allow player to place diamond type auto miners.
+    default: false
+    children:
+      autominer.type.gold: true
+  autominer.type.any:
+    description: Allow player to place any type of auto miner.
+    default: false
+    children:
+      autominer.type.diamond: true
   autominer.admin:
     description: Enable admin features for auto miner.
     default: false
+
+commands:
+  autominer:
+    description: Reload the AutoMiner configuration.
+    permission: autominer.admin
+    usage: "/autominer reload"
+    aliases: [ am ]
