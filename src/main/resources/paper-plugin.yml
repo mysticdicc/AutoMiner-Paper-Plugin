@@ -1,0 +1,67 @@
+name: auto-miner
+version: '${version}'
+
+main: dank.net.autoMiner.AutoMiner
+bootstrapper: dank.net.autoMiner.AutoMinerBootstrap
+loader: dank.net.autoMiner.AutoMinerLoader
+api-version: '26.1.2'
+load: POSTWORLD
+
+permissions:
+  autominer.place:
+    description: Allow players to place any auto miners.
+    default: true
+  autominer.limit.1:
+    description: Allow player to own 1 auto miner.
+    default: true
+  autominer.limit.2:
+    description: Allow player to own 2 auto miners.
+    default: false
+  autominer.limit.3:
+    description: Allow player to own 3 auto miners.
+    default: false
+  autominer.limit.4:
+    description: Allow player to own 4 auto miners.
+    default: false
+  autominer.limit.5:
+    description: Allow player to own 5 auto miners.
+    default: false
+  autominer.limit.unlimited:
+    description: Allow player to own unlimited auto miners.
+    default: false
+  autominer.type.wood:
+    description: Allow player to place wood type auto miners.
+    default: true
+  autominer.type.stone:
+    description: Allow player to place stone type auto miners.
+    default: false
+    children:
+      autominer.type.wood: true
+  autominer.type.copper:
+    description: Allow player to place copper type auto miners.
+    default: false
+    children:
+      autominer.type.stone: true
+  autominer.type.iron:
+    description: Allow player to place iron type auto miners.
+    default: false
+    children:
+      autominer.type.copper: true
+  autominer.type.gold:
+    description: Allow player to place gold type auto miners.
+    default: false
+    children:
+      autominer.type.iron: true
+  autominer.type.diamond:
+    description: Allow player to place diamond type auto miners.
+    default: false
+    children:
+      autominer.type.gold: true
+  autominer.type.any:
+    description: Allow player to place any type of auto miner.
+    default: false
+    children:
+      autominer.type.diamond: true
+  autominer.admin:
+    description: Enable admin features for auto miner.
+    default: false

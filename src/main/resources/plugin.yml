@@ -1,0 +1,39 @@
+name: auto-miner
+version: '${version}'
+
+main: dank.net.autoMiner.AutoMiner
+api-version: '26.1.2'
+load: POSTWORLD
+
+commands:
+  autominer:
+    description: Reload the AutoMiner configuration.
+    permission: autominer.admin
+    usage: "/autominer reload"
+    aliases: [am]
+
+permissions:
+  autominer.place:
+    description: Allow players to place any auto miners.
+    default: true
+  autominer.limit.1:
+    description: Allow player to own 1 auto miner.
+    default: true
+  autominer.limit.2:
+    description: Allow player to own 2 auto miners.
+    default: false
+  autominer.limit.3:
+    description: Allow player to own 3 auto miners.
+    default: false
+  autominer.limit.4:
+    description: Allow player to own 4 auto miners.
+    default: false
+  autominer.limit.5:
+    description: Allow player to own 5 auto miners.
+    default: false
+  autominer.limit.unlimited:
+    description: Allow player to own unlimited auto miners.
+    default: false
+  autominer.admin:
+    description: Enable admin features for auto miner.
+    default: false
