@@ -36,6 +36,7 @@ public final class AutoMiner extends JavaPlugin implements Listener {
     private static final PlainTextComponentSerializer PLAIN_TEXT = PlainTextComponentSerializer.plainText();
     private static final String MINER_HEADER = "[Mine]";
     private static final double DEFAULT_BASE_MINING_PROGRESS = 40.0D;
+    private static final boolean WILL_BREAK_ANY = false;
 
     private final Set<AutoMinerDbRecord> miners = new HashSet<>();
     private final Map<Long, MiningState> miningStates = new HashMap<>();
@@ -43,6 +44,7 @@ public final class AutoMiner extends JavaPlugin implements Listener {
     private DbManager dbManager;
     private BukkitTask miningTask;
     private double baseMiningProgress;
+    private boolean willBreakAny = false;
 
     @Override
     public void onEnable() {
@@ -304,8 +306,8 @@ public final class AutoMiner extends JavaPlugin implements Listener {
             return false;
         }
 
-        // TODO gate this by miner tier and whichever blocks you want miners to be allowed to break.
-        return type.isBlock() && type.isSolid();
+        if (willBreakAny) return true;
+        return miner.getMinerType().canMineBlock(targetBlock, miner.getMinerType());
     }
 
     private MiningState getMiningState(final AutoMinerDbRecord miner, final Block targetBlock) {
@@ -356,6 +358,8 @@ public final class AutoMiner extends JavaPlugin implements Listener {
                 0.1D,
                 getConfig().getDouble("mining.base-progress", DEFAULT_BASE_MINING_PROGRESS)
         );
+
+        this.willBreakAny = getConfig().getBoolean("mining.will-break-any", false);
     }
 
     private static final class MiningState {

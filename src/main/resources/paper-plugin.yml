@@ -65,3 +65,10 @@ permissions:
   autominer.admin:
     description: Enable admin features for auto miner.
     default: false
+
+commands:
+  autominer:
+    description: Reload the AutoMiner configuration.
+    permission: autominer.admin
+    usage: "/autominer reload"
+    aliases: [ am ]

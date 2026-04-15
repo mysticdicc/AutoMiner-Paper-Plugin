@@ -1,11 +1,10 @@
 package dank.net.autoMiner;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 
-import java.util.Locale;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 public final class AutoMinerDbRecord {
     private Long id;
@@ -144,5 +143,155 @@ public final class AutoMinerDbRecord {
 
             return Optional.empty();
         }
+
+        public boolean canMineBlock(final Block targetBlock, AutoMinerDbRecord.MinerType minerType) {
+            var blockType = targetBlock.getType();
+            List<Material> materials = new ArrayList<>();
+
+            if (minerType == MinerType.WOOD) materials = woodTypes;
+            if (minerType == MinerType.STONE) materials = stoneTypes;
+            if (minerType == MinerType.COPPER) materials = copperTypes;
+            if (minerType == MinerType.IRON) materials = ironTypes;
+            if (minerType == MinerType.GOLD) materials = goldTypes;
+            if (minerType == MinerType.DIAMOND) materials = diamondTypes;
+
+            return materials.contains(blockType);
+        }
     }
+
+    static private final List<Material> woodTypes = List.of(
+        Material.STONE,
+        Material.COBBLESTONE,
+        Material.DEEPSLATE,
+        Material.NETHERRACK,
+        Material.COAL_ORE,
+        Material.COAL_BLOCK,
+        Material.DEEPSLATE_COAL_ORE,
+        Material.GLOWSTONE
+    );
+
+    static private final List<Material> stoneTypes = List.of(
+        Material.COPPER_ORE,
+        Material.IRON_ORE,
+        Material.LAPIS_ORE,
+        Material.COPPER_BLOCK,
+        Material.IRON_BLOCK,
+        Material.LAPIS_BLOCK,
+        Material.DEEPSLATE_COPPER_ORE,
+        Material.DEEPSLATE_IRON_ORE,
+        Material.DEEPSLATE_LAPIS_ORE,
+        Material.NETHER_BRICK,
+        Material.SEA_LANTERN,
+        Material.STONE,
+        Material.COBBLESTONE,
+        Material.DEEPSLATE,
+        Material.NETHERRACK,
+        Material.COAL_ORE,
+        Material.COAL_BLOCK,
+        Material.DEEPSLATE_COAL_ORE,
+        Material.GLOWSTONE
+    );
+
+    static private final List<Material> copperTypes = List.of(
+        Material.COPPER_ORE,
+        Material.IRON_ORE,
+        Material.LAPIS_ORE,
+        Material.COPPER_BLOCK,
+        Material.IRON_BLOCK,
+        Material.LAPIS_BLOCK,
+        Material.DEEPSLATE_COPPER_ORE,
+        Material.DEEPSLATE_IRON_ORE,
+        Material.DEEPSLATE_LAPIS_ORE,
+        Material.NETHER_BRICK,
+        Material.SEA_LANTERN,
+        Material.STONE,
+        Material.COBBLESTONE,
+        Material.DEEPSLATE,
+        Material.NETHERRACK,
+        Material.COAL_ORE,
+        Material.COAL_BLOCK,
+        Material.DEEPSLATE_COAL_ORE,
+        Material.GLOWSTONE
+    );
+
+    static private final List<Material> ironTypes = List.of(
+        Material.GOLD_ORE,
+        Material.REDSTONE_ORE,
+        Material.EMERALD_ORE,
+        Material.DIAMOND_ORE,
+        Material.GOLD_BLOCK,
+        Material.REDSTONE_BLOCK,
+        Material.EMERALD_BLOCK,
+        Material.DIAMOND_BLOCK,
+        Material.DEEPSLATE_GOLD_ORE,
+        Material.DEEPSLATE_REDSTONE_ORE,
+        Material.DEEPSLATE_EMERALD_ORE,
+        Material.DEEPSLATE_DIAMOND_ORE,
+        Material.NETHER_GOLD_ORE,
+        Material.COPPER_ORE,
+        Material.IRON_ORE,
+        Material.LAPIS_ORE,
+        Material.COPPER_BLOCK,
+        Material.IRON_BLOCK,
+        Material.LAPIS_BLOCK,
+        Material.DEEPSLATE_COPPER_ORE,
+        Material.DEEPSLATE_IRON_ORE,
+        Material.DEEPSLATE_LAPIS_ORE,
+        Material.NETHER_BRICK,
+        Material.SEA_LANTERN,
+        Material.STONE,
+        Material.COBBLESTONE,
+        Material.DEEPSLATE,
+        Material.NETHERRACK,
+        Material.COAL_ORE,
+        Material.COAL_BLOCK,
+        Material.DEEPSLATE_COAL_ORE,
+        Material.GLOWSTONE
+    );
+
+    static private final List<Material> goldTypes = List.of(
+        Material.STONE,
+        Material.COBBLESTONE,
+        Material.DEEPSLATE,
+        Material.NETHERRACK,
+        Material.COAL_ORE,
+        Material.COAL_BLOCK,
+        Material.DEEPSLATE_COAL_ORE,
+        Material.GLOWSTONE
+    );
+
+    static private final List<Material> diamondTypes = List.of(
+        Material.GOLD_ORE,
+        Material.REDSTONE_ORE,
+        Material.EMERALD_ORE,
+        Material.DIAMOND_ORE,
+        Material.GOLD_BLOCK,
+        Material.REDSTONE_BLOCK,
+        Material.EMERALD_BLOCK,
+        Material.DIAMOND_BLOCK,
+        Material.DEEPSLATE_GOLD_ORE,
+        Material.DEEPSLATE_REDSTONE_ORE,
+        Material.DEEPSLATE_EMERALD_ORE,
+        Material.DEEPSLATE_DIAMOND_ORE,
+        Material.NETHER_GOLD_ORE,
+        Material.COPPER_ORE,
+        Material.IRON_ORE,
+        Material.LAPIS_ORE,
+        Material.COPPER_BLOCK,
+        Material.IRON_BLOCK,
+        Material.LAPIS_BLOCK,
+        Material.DEEPSLATE_COPPER_ORE,
+        Material.DEEPSLATE_IRON_ORE,
+        Material.DEEPSLATE_LAPIS_ORE,
+        Material.NETHER_BRICK,
+        Material.SEA_LANTERN,
+        Material.STONE,
+        Material.COBBLESTONE,
+        Material.DEEPSLATE,
+        Material.NETHERRACK,
+        Material.COAL_ORE,
+        Material.COAL_BLOCK,
+        Material.DEEPSLATE_COAL_ORE,
+        Material.GLOWSTONE
+    );
 }
