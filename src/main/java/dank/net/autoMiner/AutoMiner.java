@@ -40,7 +40,6 @@ public final class AutoMiner extends JavaPlugin implements Listener {
 
     private final Set<AutoMinerDbRecord> miners = new HashSet<>();
     private final Map<Long, MiningState> miningStates = new HashMap<>();
-    private NamespacedKey minerKey;
     private DbManager dbManager;
     private BukkitTask miningTask;
     private double baseMiningProgress;
@@ -48,7 +47,6 @@ public final class AutoMiner extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        minerKey = new NamespacedKey(this, "auto_miner");
         saveDefaultConfig();
         loadPluginConfig();
         dbManager = new DbManager(this);
@@ -63,6 +61,7 @@ public final class AutoMiner extends JavaPlugin implements Listener {
         }
 
         startMiningTask();
+        getLogger().info("Plugin has started.");
     }
 
     @Override
@@ -123,12 +122,15 @@ public final class AutoMiner extends JavaPlugin implements Listener {
         switch (canPlace) {
             case 1:
                 player.sendMessage("You do not have permission to place auto miners.");
+                getLogger().warning("Player " +  player.getName() + " tried to place an auto miner but does not have permission.");
                 return;
             case 2:
                 player.sendMessage("You are not allowed to place any more auto miners.");
+                getLogger().info("Player " + player.getName() + " tried to place an auto miner but has reached their limit.");
                 return;
             case 3:
                 player.sendMessage("You are not allowed to place this kind of auto miner.");
+                getLogger().info("Player " + player.getName() + " tried to place a " + minerType.get() + "miner but does not have permission.");
                 return;
         }
 
@@ -156,10 +158,14 @@ public final class AutoMiner extends JavaPlugin implements Listener {
     }
 
     private void loadMinerSignsFromChunk(final Chunk chunk) {
-        miners.addAll(getDbManager().getByChunk(chunk));
+        var signs = getDbManager().getByChunk(chunk);
+        miners.addAll(signs);
+        getLogger().info(signs.size() + " miners have been loaded in chunk " + chunk.getX() + " " + chunk.getZ() + ".");
     }
 
     private void unloadMinerSignsFromChunk(final Chunk chunk) {
+        int before = miners.size();
+
         miners.removeIf(record -> {
             final var location = record.getLocation();
             final boolean shouldRemove = location != null
@@ -174,6 +180,10 @@ public final class AutoMiner extends JavaPlugin implements Listener {
 
             return shouldRemove;
         });
+
+        if (before != miners.size()) {
+            getLogger().info(before - miners.size() + "miners have been unloaded in chunk " + chunk.getX() + " " + chunk.getZ() + ".");
+        }
     }
 
     private void startMiningTask() {
@@ -359,7 +369,11 @@ public final class AutoMiner extends JavaPlugin implements Listener {
                 getConfig().getDouble("mining.base-progress", DEFAULT_BASE_MINING_PROGRESS)
         );
 
-        this.willBreakAny = getConfig().getBoolean("mining.will-break-any", false);
+        getLogger().info("Config: base-progress = " + baseMiningProgress);
+
+        this.willBreakAny = getConfig().getBoolean("mining.will-break-any", WILL_BREAK_ANY);
+
+        getLogger().info("Config: will-break-any = " + willBreakAny);
     }
 
     private static final class MiningState {
