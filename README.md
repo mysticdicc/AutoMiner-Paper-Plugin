@@ -1,8 +1,5 @@
 # AutoMiner
-Autominer is a Paper 1.26.2 plugin that allows players to create signs using the essentials sign format that will automatically break the block in front of them, made to use on my Minecraft Network
-in conjunction with the Iridium SkyBlock mod and its changes to cobblestone generators. The miners have tiers corresponding to the tiers of pickaxe (barring Netherite),
-different tiers have both different mining speeds as well as different blocks they can break. You can limit players via permission to different numbers of auto miners as
-well as different tiers of miner.
+Autominer is a Paper 1.26.2 (though tested working on 1.21.11) plugin that allows players to create signs using the essentials sign format that will automatically break the block in front of them, made to use on my [Minecraft Network](https://web.dankcraft.co.uk/) in conjunction with the Iridium SkyBlock mod and its changes to cobblestone generators. The miners have tiers corresponding to the tiers of pickaxe (barring Netherite), different tiers have both different mining speeds as well as different blocks they can break. You can limit players via permission to different numbers of auto miners as well as different tiers of miner.
 
 ## Setup
 To create an auto miner sign place a sign on any surface.
